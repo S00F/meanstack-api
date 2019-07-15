@@ -3,14 +3,9 @@ require('dotenv').config();
 
 module.exports = {
 
-  // If using onine database
-  // development: {
-  //   use_env_variable: 'DATABASE_URL'
-  // },
-
   development: {
     database: 'api',
-    username: 'root',
+    username: 'postgres',
     password: 'root',
     host: '127.0.0.1',
     dialect: 'postgres'
@@ -18,7 +13,7 @@ module.exports = {
 
   test: {
     database: 'api_test',
-    username: 'steven',
+    username: 'postgres',
     password: null,
     host: '127.0.0.1',
     dialect: 'postgres'

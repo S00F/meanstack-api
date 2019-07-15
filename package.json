@@ -1,12 +1,18 @@
 {
   "name": "meanstack-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "Node, Express API",
+  "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon api/server/server.js -w server"
+    "dev": "nodemon --exec babel-node ./api/index.js",
+    "test": "export NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register  mocha ./api/test/test.js --timeout 20000 --exit",
+    "build": "rm -rf ./build && babel -d ./build ./api -s",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
   },
-  "author": "",
+  "author": "Sofien MNASSRI",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -28,6 +34,7 @@
     "babel-loader": "^8.0.6",
     "eslint": "^6.0.1",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.0"
+    "eslint-plugin-import": "^2.18.0",
+    "nodemon": "^1.19.1"
   }
 }
